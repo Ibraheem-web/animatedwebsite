@@ -2,12 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-#sec-text:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgb(226 232 240 / 1);;
-}
