@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/tailwind/input.css" />
     <link rel="stylesheet" href="/tailwind/output.css" />
+    <script defer src="script.js"></script>
     <title>Animated Website</title>
   </head>
   <body>
@@ -38,29 +39,5 @@
         <div class="bg-yellow-500 border-2 border-white h-20 w-40" data-filter="yellow"></div>
       </div>
     </section>
-
-    <script>
-        const liItem = document.querySelectorAll('ul li');
-        const divItem = document.querySelectorAll('.product div');
-
-        liItem.forEach(li => {
-           li.onclick = function() {
-            //active
-            liItem.forEach(li => {
-                li.className = "";
-            })
-            li.className = "active";
-
-            //Filter
-            const value = li.textContent;
-            divItem.forEach(div => {
-                div.style.display = 'none';
-                if (div.getAttribute('data-filter') == value.toLowerCase() || value == "All Menu") {
-                    div.style.display = 'block';
-                }
-            })
-           }
-        });
-    </script>
   </body>
 </html>
