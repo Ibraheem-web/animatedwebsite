@@ -1,21 +1,48 @@
-const liItem = document.querySelectorAll('ul li');
-const divItem = document.querySelectorAll('.product div');
+ // Get references to HTML elements
+ const searchInput = document.getElementById('searchInput');
+ const autocompleteInput = document.getElementById('autocomplete');
+ const filterCheckboxes = document.querySelectorAll('.filterCheckbox');
+ const rangeInput = document.getElementById('rangeInput');
+ const rangeValue = document.getElementById('rangeValue');
+ const itemList = document.getElementById('itemList');
 
-liItem.forEach(li => {
-    li.onclick = function () {
-        //active
-        liItem.forEach(li => {
-            li.className = "";
-        })
-        li.className = "active";
+ // Add event listeners
+ searchInput.addEventListener('input', filterItems);
+ autocompleteInput.addEventListener('input', filterItems);
+ filterCheckboxes.forEach(checkbox => {
+     checkbox.addEventListener('change', filterItems);
+ });
+ rangeInput.addEventListener('input', filterItems);
 
-        //Filter
-        const value = li.textContent;
-        divItem.forEach(div => {
-            div.style.display = 'none';
-            if (div.getAttribute('data-filter') == value.toLowerCase() || value == "All Menu") {
-                div.style.display = 'block';
-            }
-        })
-    }
-});
+ // Filter function
+ function filterItems() {
+     const searchText = searchInput.value.toLowerCase();
+     const autocompleteText = autocompleteInput.value.toLowerCase();
+     const selectedCheckboxes = [...filterCheckboxes].filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+     const rangeFilterValue = parseInt(rangeInput.value);
+
+     // Loop through items and apply filters
+     const items = itemList.querySelectorAll('.item');
+     items.forEach(item => {
+         const text = item.textContent.toLowerCase();
+         const options = item.getAttribute('data-options').split(' ');
+         const price = parseInt(options.pop()); // Extract price
+
+         if (
+             text.includes(searchText) &&
+             (autocompleteText === '' || options.includes(autocompleteText)) &&
+             (selectedCheckboxes.length === 0 || selectedCheckboxes.every(checkbox => options.includes(checkbox))) &&
+             price >= rangeFilterValue
+         ) {
+             item.classList.remove('hidden');
+         } else {
+             item.classList.add('hidden');
+         }
+     });
+
+     // Update the range value display
+     rangeValue.textContent = rangeFilterValue;
+ }
+
+ // Initial filtering
+ filterItems();

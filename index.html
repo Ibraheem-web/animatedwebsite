@@ -1,43 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/tailwind/output.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filterable List</title>
+    <!-- Include Tailwind CSS -->
     <link rel="stylesheet" href="/tailwind/input.css">
-    <script defer src="script.js"></script>
-    <title>Filter</title>
-  </head>
-  <body>
-    <section class="flex justify-center h-[100vh] items-center gap-36">
-        <div class="btn">
-            <ul class="flex gap-7 flex-col cursor-pointer">
-              <li class="active">All Menu</li>
-              <li class="">Blue</li>
-              <li class="">Green</li>
-              <li class="">Black</li>
-              <li class="">Red</li>
-              <li class="">Yellow</li>
-            </ul>
+    <link rel="stylesheet" href="/tailwind/output.css">
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <h1 class="text-3xl font-semibold mb-6 text-center">Filterable List</h1>
+        <div class="mb-4">
+            <input type="text" id="searchInput" class="w-full py-2 px-3 border rounded-lg mb-2" placeholder="Search...">
         </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2">Select Option:</label>
+            <!-- Add a datalist for autocomplete -->
+            <input type="text" id="autocomplete" list="options" class="w-full py-2 px-3 border rounded-lg" placeholder="Type to search...">
+            <datalist id="options">
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+            </datalist>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2">Checkboxes:</label>
+            <label class="inline-block mr-4">
+                <input type="checkbox" class="filterCheckbox mr-2" value="option1"> Option 1
+            </label>
+            <label class="inline-block">
+                <input type="checkbox" class="filterCheckbox mr-2" value="option2"> Option 2
+            </label>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2">Filter by Range:</label>
+            <input type="range" id="rangeInput" min="0" max="100" class="w-full">
+            <span class="block text-center mt-2" id="rangeValue">0</span>
+        </div>
+        <ul id="itemList">
+            <li class="item py-2 px-4 bg-blue-200 rounded-md shadow-md mb-2" data-options="option1 20">Product 1 (Option 1, Price: $20)</li>
+            <li class="item py-2 px-4 bg-yellow-200 rounded-md shadow-md mb-2" data-options="option2 30">Product 2 (Option 2, Price: $30)</li>
+            <li class="item py-2 px-4 bg-green-200 rounded-md shadow-md mb-2" data-options="option1 40">Product 3 (Option 1, Price: $40)</li>
+            <li class="item py-2 px-4 bg-pink-200 rounded-md shadow-md mb-2" data-options="option1 option2 50">Product 4 (Option 1, Option 2, Price: $50)</li>
+            <li class="item py-2 px-4 bg-purple-200 rounded-md shadow-md mb-2" data-options="option2 25">Product 5 (Option 2, Price: $25)</li>
+        </ul>
+    </div>
 
-      <div class="product grid grid-cols-3 grid-rows-5">
-        <div class="bg-blue-500 border-2 border-white h-20 w-40" data-filter="blue"></div>
-        <div class="bg-blue-500 border-2 border-white h-20 w-40" data-filter="blue"></div>
-        <div class="bg-blue-500 border-2 border-white h-20 w-40" data-filter="blue"></div>
-        <div class="bg-green-500 border-2 border-white h-20 w-40" data-filter="green"></div>
-        <div class="bg-green-500 border-2 border-white h-20 w-40" data-filter="green"></div>
-        <div class="bg-green-500 border-2 border-white h-20 w-40" data-filter="green"></div>
-        <div class="bg-black h-20 border-2 border-white w-40" data-filter="black"></div>
-        <div class="bg-black h-20 border-2 border-white w-40" data-filter="black"></div>
-        <div class="bg-black h-20 border-2 border-white w-40" data-filter="black"></div>
-        <div class="bg-red-500 border-2 border-white h-20 w-40" data-filter="red"></div>
-        <div class="bg-red-500 border-2 border-white h-20 w-40" data-filter="red"></div>
-        <div class="bg-red-500 border-2 border-white h-20 w-40" data-filter="red"></div>
-        <div class="bg-yellow-500 border-2 border-white h-20 w-40" data-filter="yellow"></div>
-        <div class="bg-yellow-500 border-2 border-white h-20 w-40" data-filter="yellow"></div>
-        <div class="bg-yellow-500 border-2 border-white h-20 w-40" data-filter="yellow"></div>
-      </div>
-    </section>
-  </body>
+    <script src="script.js"></script>
+</body>
 </html>
